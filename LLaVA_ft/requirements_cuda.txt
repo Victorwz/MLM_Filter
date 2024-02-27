@@ -1,0 +1,16 @@
+--extra-index-url https://pypi.ngc.nvidia.com
+
+nvidia-cuda-runtime-cu117
+nvidia-cuda-cupti-cu117
+nvidia-cuda-nvcc-cu117
+nvidia-nvml-dev-cu117
+nvidia-cuda-nvrtc-cu117
+nvidia-nvtx-cu117
+nvidia-cuda-sanitizer-api-cu117
+nvidia-cublas-cu117
+nvidia-cufft-cu117
+nvidia-curand-cu117
+nvidia-cusolver-cu117
+nvidia-cusparse-cu117
+nvidia-npp-cu117
+nvidia-nvjpeg-cu117
