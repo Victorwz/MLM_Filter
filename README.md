@@ -18,7 +18,7 @@ Please cite our paper if you find this repository interesting or helpful:
 
 ## Project Structure
 - [LLaVA_ft](LLaVA_ft): codebase for fine-tuning MLM as Data Filter
-- [mlm_filter_scoring_single_image.py](mlm_filter_scoring_single_image.py): Sample code for perform large-scale quality score generation on a single image-text pair
+- [mlm_filter_scoring_single_image.py](mlm_filter_scoring_single_image.py): Sample code for perform quality score generation on a single image-text pair
 - [mlm_filter_scoring_datacomp_batch_inference.py](mlm_filter_scoring_datacomp_batch_inference.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data
 - [run_inference.sh](run_inference.sh): Sample code for perform large-scale quality score generation on Webdataset format image-text data on machines with 8 GPUs
 
@@ -36,46 +36,6 @@ Chat about images using LLaVA without the need of Gradio interface. It also supp
 ```Shell
 python 
 ``` -->
-
-<!-- <img src="images/demo_cli.gif" width="70%"> -->
-
-## Fine-Tuning MLM as Data Filter
-
-1. Prepare data
-
-Please download the images from constituting datasets:
-
-- COCO: [train2017](http://images.cocodataset.org/zips/train2017.zip)
-- GQA: [images](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip)
-- OCR-VQA: [download script](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing), **we save all files as `.jpg`**
-- TextVQA: [train_val_images](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip)
-- VisualGenome: [part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip)
-- CC12M: ```unzip images.zip -C data/images```, the images are available at [Huggingface Data Repo](https://huggingface.co/datasets/weizhiwang/mlm-filter-instructions).
-
-After downloading all of them, organize the data as follows in `./data/images`,
-
-```
-├── coco
-│   └── train2017
-├── gqa
-│   └── images
-├── ocr_vqa
-│   └── images
-├── textvqa
-│   └── train_images
-└── vg
-│   ├── VG_100K
-│   └── VG_100K_2
-└── cc12m
-```
-
-2. Start training!
-
-You may download LLaVA's pretrained projectors in [Model Zoo](https://github.com/haotian-liu/LLaVA/blob/main/docs/MODEL_ZOO.md).
-
-Visual instruction tuning takes around 4 hours for LLaVA-v1.5-13B on 8x A100 (80G) with sampled 50k instruction dataset.
-
-Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/v_1_5/finetune.sh`](LLaVA_ft/v_1_5/finetune.sh).
 
 ## Quality Score Generation
 
@@ -104,6 +64,46 @@ Parameters to note:
 - `Tars_Per_GPU`: the number of webdataset image-text tars for a single-gpu to inference on
 - `Num_GPU`: the number of GPUs for one machine, e.g. 1, 8, 16
 
+
+## Fine-Tuning MLM as Data Filter
+
+1. Prepare data
+
+Please download the images from constituting datasets:
+
+- COCO: [train2017](http://images.cocodataset.org/zips/train2017.zip)
+- GQA: [images](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip)
+- OCR-VQA: [download script](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing), **we save all files as `.jpg`**
+- TextVQA: [train_val_images](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip)
+- VisualGenome: [part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip)
+- CC12M: ```unzip images.zip -C data/images```, the images are available at [Huggingface Data Repo](https://huggingface.co/datasets/weizhiwang/mlm_filter_instructions).
+
+After downloading all of them, organize the data as follows in `./data/images`,
+
+```
+├── coco
+│   └── train2017
+├── gqa
+│   └── images
+├── ocr_vqa
+│   └── images
+├── textvqa
+│   └── train_images
+└── vg
+│   ├── VG_100K
+│   └── VG_100K_2
+└── cc12m
+```
+
+2. Start training!
+
+You may download LLaVA's pretrained projectors in [Model Zoo](https://github.com/haotian-liu/LLaVA/blob/main/docs/MODEL_ZOO.md).
+
+Visual instruction tuning takes around 4 hours for LLaVA-v1.5-13B on 8x A100 (80G) with sampled 50k instruction dataset.
+
+Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/v_1_5/finetune.sh`](LLaVA_ft/v_1_5/finetune.sh).
+
+We open-source our fine-tuned MLM Data Filters at [MLM-Filter-GPT4V](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4v) and [MLM-Filter-GPT4](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4).
 
 ## License
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE)
