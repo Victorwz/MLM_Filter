@@ -161,11 +161,12 @@ class DataCollatorForImagePreprocessing(object):
             tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt")[:self.max_len] for prompt in prompt
         ]
         batch_input_ids = self.pad_sequence(batch_input_ids)
+        # reason for adding 29871 is because "2" is a token but " 2" is not a token in vocab. During generation, " 2" will be two tokens and 29871 is a fixed first token for generation.
+        # We can skip this to save some inference time.
         batch_input_ids = torch.cat((batch_input_ids, torch.tensor([[29871]]).repeat(batch_input_ids.shape[0], 1)), dim=1)
 
         batch_image_tensor = self.image_processor(images, return_tensors="pt")["pixel_values"]
 
-        # return batch_image_tensor, batch_input_ids
         return (batch_image_tensor, batch_input_ids, infos)
 
 # DataLoader
@@ -274,10 +275,10 @@ def main(args, gpu_id=0):
         "semantic_understanding": criteria_semantic_understanding,
     }
 
-    if args.task == "all":
+    if args.metric == "all":
         evaluation_metrics = ALL_METRICS
     else:
-        evaluation_metrics = {args.task: ALL_METRICS[args.task]}
+        evaluation_metrics = {args.metric: ALL_METRICS[args.metric]}
     
     for task, criteria in evaluation_metrics.items():
         collator = DataCollatorForImagePreprocessing(tokenizer, image_processor, model.config.mm_use_im_start_end, criteria, task, args.conv_mode, args.max_len)
@@ -312,7 +313,7 @@ def main(args, gpu_id=0):
             stop_str = conv.sep if conv.sep_style != SeparatorStyle.TWO else conv.sep2
             for batch_image_tensor, batch_input_ids, info in dataloader:
                 with torch.no_grad():
-                    conv = conv_templates[args.conv_mode].copy()
+                    
                     keywords = [stop_str, "\n"]
                     stopping_criteria = KeywordsStoppingCriteria(keywords, tokenizer, batch_input_ids)
                     # streamer = TextStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True)
@@ -346,7 +347,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model-path", type=str, default="wangweizhi98/mlm-filter-llava-13b-gpt4v")
     parser.add_argument("--model-base", type=str, default=None)
-    parser.add_argument("--task", type=str, default="image_text_matching")
+    parser.add_argument("--metric", type=str, default="image_text_matching")
     parser.add_argument("--tar-file-path", type=str, default="datacomp/medium/shards")
     parser.add_argument("--num-gpus", type=int, default=64)
     parser.add_argument("--workers", type=int, default=16)

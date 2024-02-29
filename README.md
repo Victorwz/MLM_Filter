@@ -17,8 +17,9 @@ Please cite our paper if you find this repository interesting or helpful:
 
 
 ## Project Structure
-- [LLaVA_ft](LLaVA_ft): Fine-Tune MLM as Data Filter
-- [llava_scoring_datacomp_batch_inference.py](llava_scoring_datacomp_batch_inference.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data
+- [LLaVA_ft](LLaVA_ft): codebase for fine-tuning MLM as Data Filter
+- [mlm_filter_scoring_single_image.py](mlm_filter_scoring_single_image.py): Sample code for perform large-scale quality score generation on a single image-text pair
+- [mlm_filter_scoring_datacomp_batch_inference.py](mlm_filter_scoring_datacomp_batch_inference.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data
 - [run_inference.sh](run_inference.sh): Sample code for perform large-scale quality score generation on Webdataset format image-text data on machines with 8 GPUs
 
 ## Install
@@ -49,7 +50,7 @@ Please download the images from constituting datasets:
 - OCR-VQA: [download script](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing), **we save all files as `.jpg`**
 - TextVQA: [train_val_images](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip)
 - VisualGenome: [part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip)
-- CC12M: ```unzip images.zip -C data/images```
+- CC12M: ```unzip images.zip -C data/images```, the images are available at [Huggingface Data Repo](https://huggingface.co/datasets/weizhiwang/mlm-filter-instructions).
 
 After downloading all of them, organize the data as follows in `./data/images`,
 
@@ -78,8 +79,21 @@ Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/v_1_5/finetune.sh`](LLaVA_ft/v
 
 ## Quality Score Generation
 
+### Inference on Single Image
+
 ```Shell
-bash run_inference.sh ${GPU_START_ID} ${Metric} ${Model_Path} ${Data_Path} ${Tars_Per_GPU} ${NUM_GPU}
+python mlm_filter_scoring_single_image.py --image-path /path/to/image --caption "text caption"
+```
+Parameters to note:
+
+- `--metric`: quality scoring metric for generation, select among `image_text_matching`, `object_detail_fulfillment`, `caption_text_quality`, `semantic_understanding`, `all`
+- `--image-path`: path to image file or image url
+- `--caption`: text caption
+
+### Inference on Webdataset Large-Scale Data
+
+```Shell
+bash run_inference.sh ${GPU_START_ID} ${Metric} ${Model_Path} ${Data_Path} ${Tars_Per_GPU} ${Num_GPU}
 ```
 Parameters to note:
 
@@ -88,7 +102,7 @@ Parameters to note:
 - `Model_Path`: path to the mlm filter model checkpoint
 - `Data_Path`: path to the webdataset image-text tars
 - `Tars_Per_GPU`: the number of webdataset image-text tars for a single-gpu to inference on
-- `NUM_GPU`: the number of GPUs for one machine, e.g. 1, 8, 16
+- `Num_GPU`: the number of GPUs for one machine, e.g. 1, 8, 16
 
 
 ## License
