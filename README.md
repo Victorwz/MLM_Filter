@@ -101,7 +101,7 @@ You may download LLaVA's pretrained projectors in [Model Zoo](https://github.com
 
 Visual instruction tuning takes around 4 hours for LLaVA-v1.5-13B on 8x A100 (80G) with sampled 50k instruction dataset.
 
-Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/v_1_5/finetune.sh`](LLaVA_ft/v_1_5/finetune.sh).
+Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/scripts/v_1_5/finetune.sh`](LLaVA_ft/scripts/v_1_5/finetune.sh).
 
 We open-source our fine-tuned MLM Data Filters at [MLM-Filter-GPT4V](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4v) and [MLM-Filter-GPT4](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4).
 
