@@ -144,7 +144,7 @@ if __name__ == "__main__":
     parser.add_argument("--model-path", type=str, default="wangweizhi98/mlm-filter-llava-13b-gpt4v")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--metric", type=str, default="image_text_matching")
-    parser.add_argument("--image-path", type=str, default=".assets/sample.jpg")
+    parser.add_argument("--image-path", type=str, default=".assets/sample.png")
     parser.add_argument("--caption", type=str, default="an image with two histograms")
     parser.add_argument("--conv-mode", type=str, default=None)
     parser.add_argument("--temperature", type=float, default=0.2)
