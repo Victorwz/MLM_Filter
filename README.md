@@ -24,8 +24,8 @@ Please cite our paper if you find this repository interesting or helpful:
 
 ## Install
 
-Install dependencies for quality score generation:
-```
+We high suggest you to use python==3.10. Then install dependencies for quality score generation:
+```bash
 bash setup.sh
 ```
 
