@@ -8,7 +8,7 @@ deepspeed llava/train/train_mem.py \
     --deepspeed ./scripts/zero3.json \
     --model_name_or_path vicuna-13b-v1.5 \
     --version v1 \
-    --data_path .data/llava_instruct_50k_gpt4v_cc12m.json \
+    --data_path ./data/mlm_filter_instruct_50k_gpt4v_cc12m_4k.json \
     --image_folder ./data/images \
     --vision_tower clip-vit-large-patch14-336 \
     --pretrain_mm_mlp_adapter ./llava-v1.5-mlp2x-336px-pretrain-vicuna-13b-v1.5/mm_projector.bin \

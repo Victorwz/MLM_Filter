@@ -11,7 +11,7 @@ Please cite our paper if you find this repository interesting or helpful:
 ```
 
 ## Release
-- [2/25] 🔥 We released **Fine-Tuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data.  Checkout the [paper](https://arxiv.org/abs/2402).
+- [2/25] 🔥 We released **Fine-Tuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data. Checkout the [paper](https://arxiv.org/abs/2402).
 
 <!-- <a href="https://llava.hliu.cc/"><img src="assets/demo.gif" width="70%"></a> -->
 
@@ -73,6 +73,8 @@ Parameters to note:
 
 1. Prepare data
 
+Please download the [50k multimodal instructions](https://huggingface.co/datasets/weizhiwang/mlm_filter_instructions) and save it to `./data/mlm_filter_instruct_50k_gpt4v_cc12m_4k.json`.
+
 Please download the images from constituting datasets:
 
 - COCO: [train2017](http://images.cocodataset.org/zips/train2017.zip)
@@ -105,7 +107,7 @@ You may download LLaVA's pretrained projectors in [Model Zoo](https://github.com
 
 Visual instruction tuning takes around 4 hours for LLaVA-v1.5-13B on 8x A100 (80G) with sampled 50k instruction dataset.
 
-Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/scripts/v_1_5/finetune.sh`](LLaVA_ft/scripts/v_1_5/finetune.sh).
+Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/scripts/v1_5/finetune.sh`](LLaVA_ft/scripts/v1_5/finetune.sh).
 
 We open-source our fine-tuned MLM Data Filters at [MLM-Filter-GPT4V](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4v) and [MLM-Filter-GPT4](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4).
 
