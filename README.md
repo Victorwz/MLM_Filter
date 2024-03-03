@@ -2,7 +2,7 @@
 
 
 Official implementation of our paper "[Fine-Tuned Multimodal Language Models are High-Quality Image-Text Data Filters](https://arxiv.org/abs/)". <br>
-[Weizhi Wang](https://victorwz.github.io/), [Khalil Mirini](https://khalilmrini.github.io/), [Linjie Yang](https://sites.google.com/site/linjieyang89/), [Sateesh Kumar](https://sateeshkumar21.github.io/), [Yu Tian](https://scholar.google.com/citations?user=DxPjkDoAAAAJ&hl=en), [Xifeng Yan](https://sites.cs.ucsb.edu/~xyan/index.htm), [Heng Wang](https://hengcv.github.io/)
+[Weizhi Wang](https://victorwz.github.io/), [Khalil Mrini](https://khalilmrini.github.io/), [Linjie Yang](https://sites.google.com/site/linjieyang89/), [Sateesh Kumar](https://sateeshkumar21.github.io/), [Yu Tian](https://scholar.google.com/citations?user=DxPjkDoAAAAJ&hl=en), [Xifeng Yan](https://sites.cs.ucsb.edu/~xyan/index.htm), [Heng Wang](https://hengcv.github.io/)
 
 Please cite our paper if you find this repository interesting or helpful:
 ```bibtex
