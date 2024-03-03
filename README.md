@@ -24,7 +24,11 @@ Please cite our paper if you find this repository interesting or helpful:
 
 ## Install
 
-We high suggest you to use python==3.10. Then install dependencies for quality score generation:
+We highly suggest you to use python==3.10, i.e.,
+```bash
+conda create -n mlm_filter python=3.10
+```
+Then install the dependencies for quality score generation:
 ```bash
 bash setup.sh
 ```

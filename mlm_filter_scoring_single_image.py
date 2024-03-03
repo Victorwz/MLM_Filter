@@ -141,7 +141,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="wangweizhi98/mlm-filter-llava-13b-gpt4v")
+    parser.add_argument("--model-path", type=str, default="weizhiwang/mlm-filter-llava-13b-gpt4v")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--metric", type=str, default="image_text_matching")
     parser.add_argument("--image-path", type=str, default="./assets/sample.png")
