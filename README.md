@@ -7,7 +7,7 @@ Official implementation of our paper "[Finetuned Multimodal Language Models are 
 
 
 ## Release
-- [2/25] 🔥 We released **Finetuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data. Checkout the [paper](https://arxiv.org/abs/2402).
+- [2/25] 🔥 We released **Finetuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data. Checkout the [paper](https://arxiv.org/pdf/2403.02677.pdf).
 
 <!-- <a href="https://llava.hliu.cc/"><img src="assets/demo.gif" width="70%"></a> -->
 
