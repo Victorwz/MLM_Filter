@@ -1,17 +1,13 @@
 # MLM Filter
 
 
-Official implementation of our paper "[Fine-Tuned Multimodal Language Models are High-Quality Image-Text Data Filters](https://arxiv.org/abs/)". <br>
-[Weizhi Wang](https://victorwz.github.io/), [Khalil Mrini](https://khalilmrini.github.io/), [Linjie Yang](https://sites.google.com/site/linjieyang89/), [Sateesh Kumar](https://sateeshkumar21.github.io/), [Yu Tian](https://scholar.google.com/citations?user=DxPjkDoAAAAJ&hl=en), [Xifeng Yan](https://sites.cs.ucsb.edu/~xyan/index.htm), [Heng Wang](https://hengcv.github.io/)
+Official implementation of our paper "[Finetuned Multimodal Language Models are High-Quality Image-Text Data Filters](https://arxiv.org/pdf/2403.02677.pdf)". <br>
+<!-- [Weizhi Wang](https://victorwz.github.io/), [Khalil Mrini](https://khalilmrini.github.io/), [Linjie Yang](https://sites.google.com/site/linjieyang89/), [Sateesh Kumar](https://sateeshkumar21.github.io/), [Yu Tian](https://scholar.google.com/citations?user=DxPjkDoAAAAJ&hl=en), [Xifeng Yan](https://sites.cs.ucsb.edu/~xyan/index.htm), [Heng Wang](https://hengcv.github.io/) -->
 
-Please cite our paper if you find this repository interesting or helpful:
-```bibtex
-@article{
-}
-```
+
 
 ## Release
-- [2/25] 🔥 We released **Fine-Tuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data. Checkout the [paper](https://arxiv.org/abs/2402).
+- [2/25] 🔥 We released **Finetuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data. Checkout the [paper](https://arxiv.org/abs/2402).
 
 <!-- <a href="https://llava.hliu.cc/"><img src="assets/demo.gif" width="70%"></a> -->
 
@@ -101,6 +97,8 @@ After downloading all of them, organize the data as follows in `./data/images`,
 └── cc12m
 ```
 
+As several images from OCR-VQA data urls are no longer available, you can also try to run the `check_missed_image.py` for filtering unavailable images from instruction dataset.
+
 2. Start training!
 
 You may download LLaVA's pretrained projectors in [Model Zoo](https://github.com/haotian-liu/LLaVA/blob/main/docs/MODEL_ZOO.md).
@@ -119,6 +117,18 @@ We open-source our fine-tuned MLM Data Filters at [MLM-Filter-GPT4V](https://hug
 
 ## Contacts
 For any question or issue, please feel free to contact [weizhiwang@ucsb.edu]() or submit github issues.
+
+## Citation
+
+Please cite our paper if you find this repository interesting or helpful in your research:
+```bibtex
+@article{mlm-filter,
+    title={Finetuned Multimodal Language Models Are High-Quality Image-Text Data Filters}, 
+    author={Wang, Weizhi and Mrini, Khalil and Yang, Linjie and Kumar, Sateesh and Tian, Yu and Yan, Xifeng and Wang, Heng},
+    publisher={arXiv preprint arXiv:2403.02677},
+    year={2024},
+}
+```
 
 ## Credits
 
