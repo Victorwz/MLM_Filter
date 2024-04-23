@@ -264,7 +264,7 @@ def main(args, gpu_id=0):
     
     for task, criteria in evaluation_metrics.items():
         
-        for tar_id in list(range(1000))[gpu_id * args.tars_per_gpu: (gpu_id + 1) * args.tars_per_gpu]:
+        for tar_id in list(range(13000))[gpu_id * args.tars_per_gpu: (gpu_id + 1) * args.tars_per_gpu]:
             logger.info(f"Start processing tar {tar_id}")
             collator = DataCollatorForImagePreprocessing(tokenizer, image_processor, model.config.mm_use_im_start_end, criteria, task, args.conv_mode, args.max_len)
             if os.path.exists(os.path.join(args.tar_file_path, f"{str(tar_id).zfill(8)}_{task}.parquet")):
@@ -292,7 +292,7 @@ def main(args, gpu_id=0):
             )
             
             final_data = []
-            for batch_image_tensor, batch_input_ids, info in tqdm(dataloader):
+            for batch_image_tensor, batch_input_ids, info in dataloader:
                 with torch.inference_mode():
                     output_ids = model.generate(
                         batch_input_ids.cuda(),
