@@ -267,7 +267,7 @@ def main(args, gpu_id=0):
         for tar_id in list(range(1000))[gpu_id * args.tars_per_gpu: (gpu_id + 1) * args.tars_per_gpu]:
             logger.info(f"Start processing tar {tar_id}")
             collator = DataCollatorForImagePreprocessing(tokenizer, image_processor, model.config.mm_use_im_start_end, criteria, task, args.conv_mode, args.max_len)
-            if os.path.exists(os.path.join(args.tar_file_path, f"{str(tar_id).zfill(5)}_{task}.parquet")):
+            if os.path.exists(os.path.join(args.tar_file_path, f"{str(tar_id).zfill(8)}_{task}.parquet")):
                 logger.info(f"Tar {tar_id} already processed")
                 continue
             shard_path = args.tar_file_path + "/{:08d}.tar".format(tar_id)
@@ -302,7 +302,7 @@ def main(args, gpu_id=0):
                         use_cache=True)
 
                 outputs = tokenizer.batch_decode(output_ids[:, batch_input_ids.shape[1]:], skip_special_tokens=True)
-                print(outputs)
+
                 for i in range(batch_image_tensor.shape[0]):
                     info[i][f"{task}_score"] = outputs[i]
 

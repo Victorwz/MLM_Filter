@@ -309,34 +309,25 @@ def main(args, gpu_id=0):
             )
             
             final_data = []
-            conv = conv_templates[args.conv_mode].copy()
-            stop_str = conv.sep if conv.sep_style != SeparatorStyle.TWO else conv.sep2
-            for batch_image_tensor, batch_input_ids, info in dataloader:
-                with torch.no_grad():
-                    
-                    keywords = [stop_str, "\n"]
-                    stopping_criteria = KeywordsStoppingCriteria(keywords, tokenizer, batch_input_ids)
-                    # streamer = TextStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True)
 
-                    with torch.inference_mode():
-                        try:
-                            output_ids = model.generate(
-                                batch_input_ids.cuda(),
-                                images=batch_image_tensor.half().cuda(),
-                                do_sample=False,
-                                temperature=0,
-                                max_new_tokens=2,
-                                # streamer=streamer,
-                                use_cache=True,
-                                stopping_criteria=[stopping_criteria])
-                        except IndexError:
-                            continue
+            for batch_image_tensor, batch_input_ids, info in dataloader:
+                with torch.inference_mode():
+                    try:
+                        output_ids = model.generate(
+                            batch_input_ids.cuda(),
+                            images=batch_image_tensor.half().cuda(),
+                            do_sample=False,
+                            temperature=0,
+                            max_new_tokens=2,
+                            use_cache=True)
+                    except IndexError:
+                        continue
 
                     outputs = tokenizer.batch_decode(output_ids[:, batch_input_ids.shape[1]:], skip_special_tokens=True)
                     outputs = [output.strip().strip("</s>") for output in outputs]
                     for i in range(batch_image_tensor.shape[0]):
                         info[i][f"{task}_score"] = outputs[i]
-                    # print(outputs)
+
                     final_data += info
             
             df = pd.DataFrame(final_data)
