@@ -119,8 +119,6 @@ def main(args):
         keywords = [stop_str]
         
         with torch.no_grad():
-            conv = conv_templates[args.conv_mode].copy()
-            keywords = [stop_str]
             stopping_criteria = KeywordsStoppingCriteria(keywords, tokenizer, input_ids)
             streamer = TextStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True)
 
@@ -130,13 +128,13 @@ def main(args):
                     images=image_tensor,
                     do_sample=False,
                     temperature=0,
-                    max_new_tokens=3 if args.score_only else 512,
+                    max_new_tokens=2 if args.score_only else 512,
                     streamer=streamer,
                     use_cache=True,
                     stopping_criteria=[stopping_criteria])
 
             outputs = tokenizer.batch_decode(output_ids[:, input_ids.shape[1]:], skip_special_tokens=True)
-            outputs = [output.strip().strip("</s>") for output in outputs]
+            outputs = [output.strip() for output in outputs]
             logger.info(outputs[0])
 
 if __name__ == "__main__":
