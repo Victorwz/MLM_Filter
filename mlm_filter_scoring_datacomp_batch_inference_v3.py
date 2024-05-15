@@ -302,9 +302,9 @@ def main(args, gpu_id=0):
                         use_cache=True,
                         pad_token_id=tokenizer.pad_token_id)
 
-                outputs = tokenizer.batch_decode(output_ids[:, batch_input_ids.shape[1]:], skip_special_tokens=True)
+                outputs = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
 
-                for i in range(batch_image_tensor.shape[0]):
+                for i in range(batch_input_ids.shape[0]):
                     info[i][f"{task}_score"] = outputs[i]
 
                 final_data += info
