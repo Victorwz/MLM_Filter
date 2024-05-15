@@ -299,7 +299,8 @@ def main(args, gpu_id=0):
                         images=batch_image_tensor.half().cuda(),
                         do_sample=False,
                         max_new_tokens=1,
-                        use_cache=True)
+                        use_cache=True,
+                        pad_token_id=tokenizer.pad_token_id)
 
                 outputs = tokenizer.batch_decode(output_ids[:, batch_input_ids.shape[1]:], skip_special_tokens=True)
 
@@ -314,15 +315,15 @@ def main(args, gpu_id=0):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="weizhiwang/mlm-filter-llama-3-8b-gpt4v")
+    parser.add_argument("--model-path", type=str, default="/share/edc/home/weizhiwang/models/mlm_filter_llava_llama3_8b_4k_v2_epoch_2/")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--metric", type=str, default="image_text_matching")
-    parser.add_argument("--tar-file-path", type=str, default="datacomp/medium/shards")
+    parser.add_argument("--tar-file-path", type=str, default="/share/edc/home/weizhiwang/data/medium/medium_rule_shards/")
     parser.add_argument("--num-gpus", type=int, default=64)
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--gpu-id", type=int, default=0)
-    parser.add_argument("--batch-size", type=int, default=4)
-    parser.add_argument("--tars-per-gpu", type=int, default=64)
+    parser.add_argument("--batch-size", type=int, default=1)
+    parser.add_argument("--tars-per-gpu", type=int, default=128)
     parser.add_argument("--conv-mode", type=str, default="llava_v1")
     parser.add_argument("--temperature", type=float, default=0.2)
     parser.add_argument("--max-new-tokens", type=int, default=512)
