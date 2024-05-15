@@ -303,7 +303,7 @@ def main(args, gpu_id=0):
                         pad_token_id=tokenizer.pad_token_id)
 
                 outputs = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
-
+                
                 for i in range(batch_input_ids.shape[0]):
                     info[i][f"{task}_score"] = outputs[i]
 
@@ -322,9 +322,9 @@ if __name__ == "__main__":
     parser.add_argument("--num-gpus", type=int, default=64)
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--gpu-id", type=int, default=0)
-    parser.add_argument("--batch-size", type=int, default=1)
+    parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--tars-per-gpu", type=int, default=128)
-    parser.add_argument("--conv-mode", type=str, default="llava_v1")
+    parser.add_argument("--conv-mode", type=str, default="llama_3")
     parser.add_argument("--temperature", type=float, default=0.2)
     parser.add_argument("--max-new-tokens", type=int, default=512)
     parser.add_argument("--load-8bit", action="store_true")
