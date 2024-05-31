@@ -10,7 +10,6 @@ from PIL import Image
 from io import BytesIO
 from transformers import TextStreamer
 
-import pyarrow.parquet as pq
 import pandas as pd
 
 from tqdm import tqdm

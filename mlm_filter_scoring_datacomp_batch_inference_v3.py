@@ -9,8 +9,6 @@ import argparse
 from PIL import Image
 from io import BytesIO
 from transformers import TextStreamer
-
-import pyarrow.parquet as pq
 import pandas as pd
 
 from tqdm import tqdm
@@ -315,7 +313,7 @@ def main(args, gpu_id=0):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="/share/edc/home/weizhiwang/models/mlm_filter_llava_llama3_8b_4k_v2_epoch_2/")
+    parser.add_argument("--model-path", type=str, default="/share/edc/home/weizhiwang/models/mlm-filter-llava-llama-3-8b-gpt4v/")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--metric", type=str, default="image_text_matching")
     parser.add_argument("--tar-file-path", type=str, default="/share/edc/home/weizhiwang/data/medium/medium_rule_shards/")
