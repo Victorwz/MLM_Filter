@@ -109,6 +109,9 @@ Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/scripts/v1_5/finetune.sh`](LLa
 
 We open-source our fine-tuned MLM Data Filters at [MLM-Filter-GPT4V](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4v) and [MLM-Filter-GPT4](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4).
 
+## Our Best CLIP Model on DataComp-Medium
+We also open-sourced our pre-trained CLIP-ViT-B/32 checkppint under the DataComp-Medium Benchmark Controlled Setting in [weizhiwang/clip_datacomp_medium_itm_th_66_AND_odf_th_20_gpt4v](https://huggingface.co/weizhiwang/clip_datacomp_medium_itm_th_66_AND_odf_th_20_gpt4v). Our best model is trianed on the data filtered by both the ITM and ODF Quality Scores.
+
 ## License
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE)
 [![Data License](https://img.shields.io/badge/Data%20License-CC%20By%20NC%204.0-red.svg)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/DATA_LICENSE)
