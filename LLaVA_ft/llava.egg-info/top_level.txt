@@ -1,4 +1,0 @@
-checkpoints
-dependencies
-images
-llava
