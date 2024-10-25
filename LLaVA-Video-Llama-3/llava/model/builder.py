@@ -164,6 +164,8 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
             vision_tower.load_model(device_map=device_map)
         if device_map != 'auto':
             vision_tower.to(device=device_map, dtype=torch.float16)
+        else:
+            vision_tower.to(device=model.device, dtype=torch.float16)
         image_processor = vision_tower.image_processor
 
     if hasattr(model.config, "tokenizer_model_max_length"):
