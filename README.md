@@ -17,7 +17,7 @@ Official implementation of our paper "[Finetuned Multimodal Language Models are 
 - [LLaVA-Video-Llama-3](LLaVA-Video-Llama-3): codebase for fine-tuning MLM as Data Filter
 - [mlm_filter_scoring_single_image.py](mlm_filter_scoring_single_image.py): Sample code for perform quality score generation on a single image-text pair
 - [mlm_filter_scoring_datacomp_batch_inference.py](mlm_filter_scoring_datacomp_batch_inference.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data
-- [mlm_filter_scoring_datacomp_batch_inference_llama3.py](mlm_filter_scoring_datacomp_batch_inference_llama3.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data for llama3 based MLM-Filter models
+- [mlm_filter_scoring_datacomp_batch_inference_llama_3.py](mlm_filter_scoring_datacomp_batch_inference_llama_3.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data for llama3 based MLM-Filter models
 - [run_inference.sh](run_inference.sh): Sample code for perform large-scale quality score generation on Webdataset format image-text data on machines with 8 GPUs
 
 ## Install
