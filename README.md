@@ -7,15 +7,17 @@ Official implementation of our paper "[Finetuned Multimodal Language Models are 
 
 
 ## Release
-- [2/25] 🔥 We released **Finetuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data. Checkout the [paper](https://arxiv.org/pdf/2403.02677.pdf).
+- [10/24/2024] 🔥 We released two new MLM-Filter models based on llama3, [mlm-filter-llama-3-8b](https://huggingface.co/weizhiwang/mlm-filter-llama-3-8b) and [mlm-filter-llama-3.2-3b](https://huggingface.co/weizhiwang/mlm-filter-llama-3.2-3b). The LLaVA codebase is upgraded to Weizhi's customized new version [LLaVA-Video-Llama-3](https://github.com/Victorwz/LLaVA-Video-Llama-3).
+- [2/25/2024] 🔥 We released **Finetuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data. Checkout the [paper](https://arxiv.org/pdf/2403.02677.pdf).
 
 <!-- <a href="https://llava.hliu.cc/"><img src="assets/demo.gif" width="70%"></a> -->
 
 
 ## Project Structure
-- [LLaVA_ft](LLaVA_ft): codebase for fine-tuning MLM as Data Filter
+- [LLaVA-Video-Llama-3](LLaVA-Video-Llama-3): codebase for fine-tuning MLM as Data Filter
 - [mlm_filter_scoring_single_image.py](mlm_filter_scoring_single_image.py): Sample code for perform quality score generation on a single image-text pair
 - [mlm_filter_scoring_datacomp_batch_inference.py](mlm_filter_scoring_datacomp_batch_inference.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data
+- [mlm_filter_scoring_datacomp_batch_inference_llama3.py](mlm_filter_scoring_datacomp_batch_inference_llama3.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data for llama3 based MLM-Filter models
 - [run_inference.sh](run_inference.sh): Sample code for perform large-scale quality score generation on Webdataset format image-text data on machines with 8 GPUs
 
 ## Install
