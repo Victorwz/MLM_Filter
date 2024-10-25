@@ -19,7 +19,7 @@ dependencies = [
     "pydantic", "markdown2[all]", "numpy", "scikit-learn==1.2.2",
     "gradio", "gradio_client", "pandas", "webdataset",
     "requests", "httpx", "uvicorn", "fastapi",
-    "einops==0.6.1", "einops-exts==0.0.4", "timm==0.9.10", "evaluate", "protobuf",
+    "einops==0.6.1", "einops-exts==0.0.4", "timm==0.9.10", "evaluate", "protobuf==3.20.0",
     "opencv-python",
 ]
 
