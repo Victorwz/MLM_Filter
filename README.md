@@ -28,7 +28,7 @@ conda create -n mlm_filter python=3.10
 ```
 Then install the dependencies for quality score generation:
 ```bash
-bash setup.sh
+pip install -e LLaVA-Unified
 ```
 
 <!-- ### CLI Inference

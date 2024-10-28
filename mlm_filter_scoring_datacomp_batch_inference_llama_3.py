@@ -168,7 +168,7 @@ def main(args, gpu_id=0):
             )
             
             final_data = []
-            for batch_image_tensor, batch_input_ids, info in dataloader:
+            for batch_image_tensor, batch_input_ids, info in tqdm(dataloader):
                 with torch.inference_mode():
                     output_ids = model.generate(
                         batch_input_ids.cuda(),
