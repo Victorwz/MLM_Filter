@@ -63,7 +63,7 @@ class DataCollatorForImagePreprocessing(object):
         self.criteria = criteria
         self.task = task
         self.max_len = max_len
-        self.whitespace_id = 220
+        self.whitespace_id = self.tokenizer(" ")["input_ids"][-1]
 
     def format_text(self, text: str):
         text = LLAVA_INSTRUCTION_TEMPLATE.format(caption=text, criteria=self.criteria, aspect=self.task.replace("_", " "))
@@ -119,11 +119,31 @@ def main(args, gpu_id=0):
     disable_torch_init()
 
     model_name = get_model_name_from_path(args.model_path)
-    print(model_name)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     tokenizer, model, image_processor, context_len = load_pretrained_model(args.model_path, args.model_base, model_name, args.load_8bit, args.load_4bit, device=device)
     # set padding side to `left` for batch text generation
     model.config.tokenizer_padding_side = tokenizer.padding_side = "left"
+
+    if 'llama-2' in model_name.lower():
+        conv_mode = "llava_llama_2"
+        max_new_tokens = 2
+    elif "v1" in model_name.lower():
+        conv_mode = "llava_v1"
+        max_new_tokens = 2
+    elif "llama-3" in model_name.lower():
+        conv_mode = "llama_3"
+        max_new_tokens = 1
+    elif "qwen" in model_name.lower():
+        conv_mode = "qwen_instruct"
+        max_new_tokens = 2
+    else:
+        conv_mode = "llava_v0"
+        max_new_tokens = 2
+
+    if args.conv_mode is not None and conv_mode != args.conv_mode:
+        logger.info('[WARNING] the auto inferred conversation mode is {}, while `--conv-mode` is {}, using {}'.format(conv_mode, args.conv_mode, args.conv_mode))
+    else:
+        args.conv_mode = conv_mode
 
     logger.info(f"Model loading finished for CUDA {torch.cuda.current_device()}")
     
@@ -175,7 +195,7 @@ def main(args, gpu_id=0):
                         batch_input_ids.cuda(),
                         images=batch_image_tensor.half().cuda(),
                         do_sample=False,
-                        max_new_tokens=1,
+                        max_new_tokens=max_new_tokens,
                         use_cache=True,
                         pad_token_id=tokenizer.pad_token_id)
 

@@ -7,17 +7,18 @@ Official implementation of our paper "[Finetuned Multimodal Language Models are 
 
 
 ## Release
-- [10/24/2024] 🔥 We released two new MLM-Filter models based on llama3, [mlm-filter-llama-3-8b](https://huggingface.co/weizhiwang/mlm-filter-llama-3-8b) and [mlm-filter-llama-3.2-3b](https://huggingface.co/weizhiwang/mlm-filter-llama-3.2-3b). The LLaVA codebase is upgraded to Weizhi's customized new version [LLaVA-Video-Llama-3](https://github.com/Victorwz/LLaVA-Video-Llama-3).
+- [12/30/2024] 🔥 We released a new generation MLM-Filter model based on Qwen2.5-1.5B, [mlm-filter-qwen2.5-1.5b-gpt4o](https://huggingface.co/weizhiwang/mlm-filter-qwen2.5-1.5b-gpt4o). The instruction data are re-generated with GPT-4o. With the much smaller LLM backbone, the inference has been significantly improved. The llava codebase for mlm-filter model inference has been completely removed and integrated into [LLaVA-Unified](https://github.com/Victorwz/LLaVA-Unified).
+- [10/24/2024] 🔥 We released two new MLM-Filter models based on llama3, [mlm-filter-llama-3-8b](https://huggingface.co/weizhiwang/mlm-filter-llama-3-8b) and [mlm-filter-llama-3.2-3b](https://huggingface.co/weizhiwang/mlm-filter-llama-3.2-3b).
 - [2/25/2024] 🔥 We released **Finetuned Multimodal Language Models are High-Quality Image-Text Data Filters**. We propose to adopt fine-tuned Multimodal Language Model as effective and efficient data filters to select high-quality image-text pairs from large-scale web-crawled iamge-text data. Checkout the [paper](https://arxiv.org/pdf/2403.02677.pdf).
 
 <!-- <a href="https://llava.hliu.cc/"><img src="assets/demo.gif" width="70%"></a> -->
 
 
 ## Project Structure
-- [LLaVA-Video-Llama-3](LLaVA-Video-Llama-3): codebase for fine-tuning MLM as Data Filter
+<!-- - [LLaVA-Video-Llama-3](LLaVA-Video-Llama-3): codebase for fine-tuning MLM as Data Filter -->
 - [mlm_filter_scoring_single_image.py](mlm_filter_scoring_single_image.py): Sample code for perform quality score generation on a single image-text pair
 - [mlm_filter_scoring_datacomp_batch_inference.py](mlm_filter_scoring_datacomp_batch_inference.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data
-- [mlm_filter_scoring_datacomp_batch_inference_llama_3.py](mlm_filter_scoring_datacomp_batch_inference_llama_3.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data for llama3 based MLM-Filter models
+- [mlm_filter_scoring_datacomp_batch_inference_v2.py](mlm_filter_scoring_datacomp_batch_inference_v2.py): Sample code for perform large-scale quality score generation on Webdataset format image-text data for Llama3 or Qwen2.5 based MLM-Filter models
 - [run_inference.sh](run_inference.sh): Sample code for perform large-scale quality score generation on Webdataset format image-text data on machines with 8 GPUs
 
 ## Install
@@ -28,7 +29,7 @@ conda create -n mlm_filter python=3.10
 ```
 Then install the dependencies for quality score generation:
 ```bash
-pip install -e LLaVA-Unified
+pip install git+https://github.com/Victorwz/LLaVA-Unified.git
 ```
 
 <!-- ### CLI Inference
@@ -77,7 +78,8 @@ Please download the images from constituting datasets:
 
 - COCO: [train2017](http://images.cocodataset.org/zips/train2017.zip)
 - GQA: [images](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip)
-- OCR-VQA: [download script](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing), **we save all files as `.jpg`**
+- OCR-VQA: [
+ocr_vqa_images_llava_v15.zip](https://huggingface.co/datasets/weizhiwang/llava_v15_instruction_images/resolve/main/ocr_vqa_images_llava_v15.zip).
 - TextVQA: [train_val_images](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip)
 - VisualGenome: [part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip)
 - CC12M: ```unzip images.zip -C data/images```, the images are available at [Huggingface Data Repo](https://huggingface.co/datasets/weizhiwang/mlm_filter_instructions).
@@ -99,17 +101,13 @@ After downloading all of them, organize the data as follows in `./data/images`,
 └── cc12m
 ```
 
-As several images from OCR-VQA data urls are no longer available, you can also try to run the `check_missed_image.py` for filtering unavailable images from instruction dataset.
+OCR-VQA are repacked by ourselves to ensure there is no failed-to-download images which are included in LLaVA-v1.5-665k instruction dataset. 
 
 2. Start training!
 
-You may download LLaVA's pretrained projectors in [Model Zoo](https://github.com/haotian-liu/LLaVA/blob/main/docs/MODEL_ZOO.md).
+Please refer to [LLaVA-Unified](https://github.com/Victorwz/LLaVA-Unified) for more fine-tuning guidance.
 
-Visual instruction tuning takes around 4 hours for LLaVA-v1.5-13B on 8x A100 (80G) with sampled 50k instruction dataset.
-
-Training script with DeepSpeed ZeRO-3: [`LLaVA_ft/scripts/v1_5/finetune.sh`](LLaVA_ft/scripts/v1_5/finetune.sh).
-
-We open-source our fine-tuned MLM Data Filters at [MLM-Filter-GPT4V](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4v) and [MLM-Filter-GPT4](https://huggingface.co/weizhiwang/mlm-filter-llava-13b-gpt4).
+Training script with DeepSpeed ZeRO-3: [`LLaVA_Unified/scripts/mlm_filter/finetune.sh`](https://github.com/Victorwz/LLaVA-Unified/blob/main/scripts/mlm_filter/finetune.sh).
 
 ## Our Best CLIP Model on DataComp-Medium
 We also open-sourced our pre-trained CLIP-ViT-B/32 checkppint under the DataComp-Medium Benchmark Controlled Setting in [weizhiwang/clip_datacomp_medium_itm_th_66_AND_odf_th_20_gpt4v](https://huggingface.co/weizhiwang/clip_datacomp_medium_itm_th_66_AND_odf_th_20_gpt4v). Our best model is trianed on the data filtered by both the ITM and ODF Quality Scores.
