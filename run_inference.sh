@@ -24,7 +24,7 @@ if [[ $gpu_name == *"V100"* ]]; then
   do
     {   
         echo $i
-        CUDA_VISIBLE_DEVICES=$i python mlm_filter_scoring_datacomp_batch_inference_llama_3.py --gpu-id $(expr $i + $gpu_start_id) --batch-size $batch_size --workers $workers --tars-per-gpu $tpg --metric $task --model-path $3 --tar-file-path $4
+        CUDA_VISIBLE_DEVICES=$i python mlm_filter_scoring_datacomp_batch_inference_v2.py --gpu-id $(expr $i + $gpu_start_id) --batch-size $batch_size --workers $workers --tars-per-gpu $tpg --metric $task --model-path $3 --tar-file-path $4
     } & 
   done
 elif [[ $gpu_name == *"A100"* ]]; then
@@ -35,7 +35,7 @@ elif [[ $gpu_name == *"A100"* ]]; then
   do
     {   
         echo $i
-        CUDA_VISIBLE_DEVICES=$i python mlm_filter_scoring_datacomp_batch_inference_llama_3.py --gpu-id $(expr $i + $gpu_start_id) --batch-size $batch_size --workers $workers --tars-per-gpu $tpg --metric $task --model-path $3 --tar-file-path $4
+        CUDA_VISIBLE_DEVICES=$i python mlm_filter_scoring_datacomp_batch_inference_v2.py --gpu-id $(expr $i + $gpu_start_id) --batch-size $batch_size --workers $workers --tars-per-gpu $tpg --metric $task --model-path $3 --tar-file-path $4
     } & 
   done
 else
@@ -49,7 +49,7 @@ else
     {   
         echo $i
         sleep $((i * 20))
-        CUDA_VISIBLE_DEVICES=$i python mlm_filter_scoring_datacomp_batch_inference_llama_3.py --gpu-id $(expr $i + $gpu_start_id) --batch-size $batch_size --workers $workers --tars-per-gpu $tpg --metric $task --model-path $3 --tar-file-path $4
+        CUDA_VISIBLE_DEVICES=$i python mlm_filter_scoring_datacomp_batch_inference_v2.py --gpu-id $(expr $i + $gpu_start_id) --batch-size $batch_size --workers $workers --tars-per-gpu $tpg --metric $task --model-path $3 --tar-file-path $4
     } & 
   done
 fi
