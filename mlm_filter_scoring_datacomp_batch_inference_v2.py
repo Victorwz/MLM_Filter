@@ -212,12 +212,12 @@ def main(args, gpu_id=0):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="/share/edc/home/weizhiwang/models/mlm-filter-llava-llama-3-8b-gpt4v/")
+    parser.add_argument("--model-path", type=str, default="weizhiwang/mlm-filter-qwen2.5-1.5b-gpt4o")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--metric", type=str, default="image_text_matching")
-    parser.add_argument("--tar-file-path", type=str, default="/share/edc/home/weizhiwang/data/medium/medium_rule_shards/")
+    parser.add_argument("--tar-file-path", type=str, default="data/medium/shards/")
     parser.add_argument("--num-gpus", type=int, default=64)
-    parser.add_argument("--workers", type=int, default=16)
+    parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--gpu-id", type=int, default=0)
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--tars-per-gpu", type=int, default=128)
