@@ -221,7 +221,7 @@ if __name__ == "__main__":
     parser.add_argument("--gpu-id", type=int, default=0)
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--tars-per-gpu", type=int, default=128)
-    parser.add_argument("--conv-mode", type=str, default="llama_3")
+    parser.add_argument("--conv-mode", type=str, default="qwen_instruct")
     parser.add_argument("--temperature", type=float, default=0.2)
     parser.add_argument("--max-new-tokens", type=int, default=512)
     parser.add_argument("--load-8bit", action="store_true")
